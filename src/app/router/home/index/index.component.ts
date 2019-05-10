@@ -1,4 +1,8 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, ViewChild } from "@angular/core";
+import { UnitComponent } from "src/app/components/unit/unit.component";
+import { Store } from "@ngrx/store";
+import { Observable } from "rxjs";
+import { AppState } from "src/app/store/app.reducer";
 
 @Component({
   selector: "app-index",
@@ -6,29 +10,46 @@ import { Component, OnInit } from "@angular/core";
   styleUrls: ["./index.component.scss"]
 })
 export class IndexComponent implements OnInit {
-  pictures = [
-    {
-      title: "a natural view",
-      img:
-        "https://d2lm6fxwu08ot6.cloudfront.net/img-thumbs/960w/8V46UZCS0V.jpg"
-    },
-    {
-      title: "a natural view",
-      img:
-        "https://d2lm6fxwu08ot6.cloudfront.net/img-thumbs/960w/R926LU1YEA.jpg"
-    },
-    {
-      title: "a natural view",
-      img:
-        "https://d2lm6fxwu08ot6.cloudfront.net/img-thumbs/960w/LTLE4QGRVQ.jpg"
-    },
-    {
-      title: "a natural view",
-      img:
-        "https://d2lm6fxwu08ot6.cloudfront.net/img-thumbs/960w/U9PP3KXXY2.jpg"
-    }
-  ];
-  constructor() {}
+  current: string = "";
+
+  @ViewChild("unit") unit: UnitComponent;
+
+  text = `Unit1 Let's count! Look! Coll! How many red marbles? One, two, three. Three red marbles. How many green marbles? One, two, three, four. Four green marbles. How many yellow marbles? One, two, three, four, five. Five yellow marbles.`;
+
+  unit2 = `Unit2 This is my pencil Ouch! I'm sorry, Yang Ling. That's OK. Is this your book, Liu Tao? Yes. Thank you, Su Hai. Is this your pencil, Yang Ling? No. Oh, this is my pencil! Ha! Ha! a book a pencil a ruler a rubber`;
+
+  app$: Observable<AppState>;
+  constructor(public store: Store<any>) {
+    this.app$ = store.select("app");
+    this.app$.subscribe(z => {
+      console.log(z);
+    });
+    // this.text = this.text.replace("\r", "");
+    // this.text = this.text.replace("\n", "");
+    // this.text = this.text.replace("\t", "");
+    this.store.dispatch({ type: "SET_TEXT", payload: this.unit2 });
+  }
 
   ngOnInit() {}
+
+  ngAfterViewInit(): void {}
+
+  onKeydownEvent(input) {
+    if (input.key === "Shift") return;
+    console.log(input);
+    if (input.key) {
+      this.input(input.key);
+    }
+  }
+
+  input(input: string) {
+    this.store.dispatch({ type: "INPUT", payload: input });
+  }
+
+  next() {
+    // this.store.dispatch({ type: "NEXT" });
+  }
+  button() {
+    // this.store.dispatch({ type: "SET_TEXT", payload: this.text });
+  }
 }
