@@ -23,6 +23,10 @@ export function appReducer(state = initialApp, action: any) {
       if (state.input === state.currentWord) {
         state.currentIndex += 1;
         state.currentWord = state.text[state.currentIndex];
+        if (state.currentWord === "\\n") {
+          state.currentIndex += 1;
+          state.currentWord = state.text[state.currentIndex];
+        }
         if (state.currentIndex > 1) {
           state.correct += state.text[state.currentIndex - 2];
         }
@@ -35,8 +39,10 @@ export function appReducer(state = initialApp, action: any) {
     case "SET_TEXT":
       console.log("SET_TEXT");
       state.text = action.payload;
+      state.text = state.text.replace(/\t/g, "");
       state.currentIndex = 0;
       state.currentWord = state.text[0];
+      state.correct = "";
       return state;
     case "NEXT":
       state.currentIndex += 1;
@@ -46,3 +52,5 @@ export function appReducer(state = initialApp, action: any) {
       return state;
   }
 }
+
+function isEnterNext() {}
