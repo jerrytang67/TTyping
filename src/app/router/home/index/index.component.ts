@@ -16,12 +16,48 @@ export class IndexComponent implements OnInit {
 
   units = {
     abc: `abcdefghijklmnopqrstuvwxyz`,
-    unit1: `Unit1 Let's count! Look! Coll! How many red marbles? One, two, three. Three red marbles. How many green marbles? One, two, three, four. Four green marbles. How many yellow marbles? One, two, three, four, five. Five yellow marbles.`,
-    unit2: `Unit2 This is my pencil Ouch! I'm sorry, Yang Ling. That's OK. Is this your book, Liu Tao? Yes. Thank you, Su Hai. Is this your pencil, Yang Ling? No. Oh, this is my pencil! Ha! Ha! a book a pencil a ruler a rubber`,
+    unit1: `Unit1 Let's count!
+Look! Coll! How many red marbles?
+One, two, three. Three red marbles.
+How many green marbles?
+One, two, three, four. Four green marbles.
+How many yellow marbles?
+One, two, three, four, five. Five yellow marbles.`,
 
-    unit3: `Unit3 I like carrots I like carrots. Me too. Onions? No, thanks. I like onions. Peas? Yes, please. We all like peas. carrots onions peas peppers`,
+    unit2: `Unit2 This is my pencil
+Ouch! I'm sorry, Yang Ling.
+That's OK.
+Is this your book, Liu Tao?
+Yes. Thank you, Su Hai.
+Is this your pencil, Yang Ling?
+No. Oh, this is my pencil!
+Ha! Ha!
+a book
+a pencil
+a ruler
+a rubber`,
 
-    unit4: `Unit4 Spring Look at the trees. They're green. Look at the flowers. They're beautiful. Look at the birds. They're happy. Look at the kites. They're colourful. a tree a flower a bird a kite`,
+    unit3: `Unit3 I like carrots
+I like carrots.
+Me too.
+Onions?
+No, thanks.
+I like onions. Peas?
+Yes, please. We all like peas.
+carrots
+onions
+peas
+peppers`,
+
+    unit4: `Unit4 Spring
+Look at the trees. They're green.
+Look at the flowers. They're beautiful.
+Look at the birds. They're happy.
+Look at the kites. They're colourful.
+a tree
+a flower
+a bird
+a kite`,
     unit5: `TODO`,
     unit6: `TODO`,
     unit7: `Unit7 What's the matter?
@@ -48,10 +84,16 @@ Good night, Mum and Dad. happy hungry ill sad thirsty tired`
   ngAfterViewInit(): void {}
 
   onKeydownEvent(input) {
-    if (input.key === "Shift") return;
     console.log(input);
-    if (input.key) {
-      this.input(input.key);
+    if (input.data) {
+      this.input(input.data);
+    }
+  }
+  enterKey(input) {
+    if (input.key === "Enter") {
+      this.input(`
+`);
+    
     }
   }
 

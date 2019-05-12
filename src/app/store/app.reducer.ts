@@ -6,11 +6,13 @@ export interface AppState {
   text: string;
   input: string;
   correct: string;
+  currentWordShow: string;
 }
 
 export const initialApp: AppState = {
   currentIndex: 0,
   currentWord: "",
+  currentWordShow: "",
   text: "",
   input: "",
   correct: ""
@@ -21,14 +23,19 @@ export function appReducer(state = initialApp, action: any) {
     case "INPUT":
       state.input = action.payload;
       if (state.input === state.currentWord) {
+        state.correct += state.currentWord;
         state.currentIndex += 1;
         state.currentWord = state.text[state.currentIndex];
-        if (state.currentWord === "\\n") {
-          state.currentIndex += 1;
-          state.currentWord = state.text[state.currentIndex];
+        state.currentWordShow = state.currentWord;
+        if (
+          state.currentWord ===
+          `
+`
+        ) {
+          state.currentWordShow = "回车";
         }
-        if (state.currentIndex > 1) {
-          state.correct += state.text[state.currentIndex - 2];
+        if (state.currentWord === " ") {
+          state.currentWordShow = "空格";
         }
       }
       return state;
@@ -42,6 +49,7 @@ export function appReducer(state = initialApp, action: any) {
       state.text = state.text.replace(/\t/g, "");
       state.currentIndex = 0;
       state.currentWord = state.text[0];
+      state.currentWordShow = state.currentWord;
       state.correct = "";
       return state;
     case "NEXT":
