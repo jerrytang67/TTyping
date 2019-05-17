@@ -82,10 +82,11 @@ run
 jump
 hop
 walk`,
-    unit7: `Unit6 What's that?
-That's this? Shh! It's a pig.
+
+    unit7: `Unit7 What's that?
+What's this? Shh! It's a pig.
 Hello! What's that?
-Baa! It's a lamb.
+Baa! It's a lamb.h
 Quack! Quack! What's that? It's a duck.
 a pig
 a lamb
@@ -158,6 +159,7 @@ tired`
     }
     setTimeout(() => {
       const speechSU = new window.SpeechSynthesisUtterance(text);
+      speechSU.rate = 0.6;
       this.synth.speak(speechSU);
     }, 10);
   }
