@@ -18,7 +18,7 @@ declare var window: any;
   styleUrls: ["./index.component.scss"]
 })
 export class IndexComponent implements AfterViewInit {
-  @ViewChild("textArea") textArea: ElementRef;
+  @ViewChild("textArea", { static: false }) textArea: ElementRef;
   current = "";
   synth = window.speechSynthesis;
   units = {
@@ -101,21 +101,21 @@ A bird? Ha! Ha! Look!
 a bottle
 a hankie
 a sticker
-a yo-yo`,
-    unit47: `Unit7 What's the matter?
-Come and have a pie, Taotao.
-Thanks, Dad, but I'm not hungry.
-I'm thirsty. Can I have some water, Mum?
-Here you are. Thank you, Mum.
-What's the matter, Taotao? Are you ill?
-No, but I'm tired. I want to go to bed. Cood night, dear.
-Good night, Mum and Dad.
-happy
-hungry
-ill
-sad
-thirsty
-tired`
+a yo-yo`
+    //     unit47: `Unit7 What's the matter?
+    // Come and have a pie, Taotao.
+    // Thanks, Dad, but I'm not hungry.
+    // I'm thirsty. Can I have some water, Mum?
+    // Here you are. Thank you, Mum.
+    // What's the matter, Taotao? Are you ill?
+    // No, but I'm tired. I want to go to bed. Cood night, dear.
+    // Good night, Mum and Dad.
+    // happy
+    // hungry
+    // ill
+    // sad
+    // thirsty
+    // tired`
   };
 
   app$: Observable<AppState>;
@@ -159,7 +159,11 @@ tired`
     }
     setTimeout(() => {
       const speechSU = new window.SpeechSynthesisUtterance(text);
-      speechSU.rate = 0.6;
+      // speechSU.voice = speechSynthesis.getVoices().filter(voice => {
+      //   return voice.name === "Google UK English Male";
+      // })[0];
+      speechSU.rate = 0.8;
+      speechSU.language = "en";
       this.synth.speak(speechSU);
     }, 10);
   }
