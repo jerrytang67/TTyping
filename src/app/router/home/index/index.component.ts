@@ -86,7 +86,7 @@ walk`,
     unit7: `Unit7 What's that?
 What's this? Shh! It's a pig.
 Hello! What's that?
-Baa! It's a lamb.h
+Baa! It's a lamb.
 Quack! Quack! What's that? It's a duck.
 a pig
 a lamb
@@ -159,9 +159,9 @@ a yo-yo`
     }
     setTimeout(() => {
       const speechSU = new window.SpeechSynthesisUtterance(text);
-      // speechSU.voice = speechSynthesis.getVoices().filter(voice => {
-      //   return voice.name === "Google UK English Male";
-      // })[0];
+      speechSU.voice = speechSynthesis.getVoices().find(voice => {
+        return voice.name === "Google UK English Male";
+      });
       speechSU.rate = 0.8;
       speechSU.language = "en";
       this.synth.speak(speechSU);
