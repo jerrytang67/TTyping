@@ -123,9 +123,6 @@ a yo-yo`
   // tslint:disable-next-line: deprecation
   constructor(public store: Store<any>, private renderer: Renderer) {
     this.app$ = store.select("app");
-    this.app$.subscribe(z => {
-      console.log(z);
-    });
     this.store.dispatch({ type: "SET_TEXT", payload: this.units.unit3 });
   }
 
@@ -159,9 +156,12 @@ a yo-yo`
     }
     setTimeout(() => {
       const speechSU = new window.SpeechSynthesisUtterance(text);
-      speechSU.voice = speechSynthesis.getVoices().find(voice => {
-        return voice.name === "Google UK English Male";
-      });
+      speechSU.voice = speechSynthesis.getVoices().filter(voice => {
+        console.log(voice.name);
+        return (
+          voice.name === "Microsoft David Desktop - English (United States)"
+        );
+      })[0];
       speechSU.rate = 0.8;
       speechSU.language = "en";
       this.synth.speak(speechSU);
