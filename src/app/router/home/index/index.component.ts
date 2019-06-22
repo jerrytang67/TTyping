@@ -22,6 +22,9 @@ export class IndexComponent implements AfterViewInit {
   current = "";
   synth = window.speechSynthesis;
   units = {
+    unit2_1:`
+    `,
+
     abc: `abcdefghijklmnopqrstuvwxyz`,
     unit1: `Unit1 Let's count!
 Look! Coll! How many red marbles?
