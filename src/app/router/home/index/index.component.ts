@@ -1,11 +1,4 @@
-import {
-  Component,
-  OnInit,
-  ViewChild,
-  ElementRef,
-  Renderer,
-  AfterViewInit
-} from "@angular/core";
+import { Component, OnInit, ViewChild, ElementRef, AfterViewInit, Renderer2 } from "@angular/core";
 import { Store } from "@ngrx/store";
 import { Observable } from "rxjs";
 import { AppState } from "src/app/store/app.reducer";
@@ -18,7 +11,7 @@ declare var window: any;
   styleUrls: ["./index.component.scss"]
 })
 export class IndexComponent implements AfterViewInit {
-  @ViewChild("textArea", { static: false }) textArea: ElementRef;
+  @ViewChild("textArea") textArea: ElementRef;
   current = "";
   synth = window.speechSynthesis;
   units = {
@@ -167,14 +160,14 @@ We all like PE!
   app$: Observable<AppState>;
 
   // tslint:disable-next-line: deprecation
-  constructor(public store: Store<any>, private renderer: Renderer) {
+  constructor(public store: Store<any>, private renderer: Renderer2) {
     this.app$ = store.select("app");
     this.store.dispatch({ type: "SET_TEXT", payload: this.units.unit1 });
   }
 
   ngAfterViewInit(): void {
     setInterval(() => {
-      this.renderer.invokeElementMethod(this.textArea.nativeElement, "focus");
+      this.textArea.nativeElement.focus();
     }, 1000);
   }
 
